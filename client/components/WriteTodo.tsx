@@ -1,5 +1,5 @@
 import { useCreate } from '../hooks/use-create'
-import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 export function WriteToDo() {
   const [formData, setFormData] = useState('')
   const { mutate: createToDo } = useCreate()
