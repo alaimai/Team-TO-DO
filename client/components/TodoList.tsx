@@ -9,14 +9,18 @@ export function TodoList() {
   const { mutate: updateTodo } = useUpdate()
   const handleClickIm = (e: React.MouseEvent<HTMLSpanElement>) => {
     updateTodo({
-      id: (e.target as HTMLElement).getAttribute('data-id'),
-      update: { important: !(e.target.getAttribute('booleanmark') === 'true') },
+      id: (e.currentTarget as HTMLElement).getAttribute('data-id'),
+      update: {
+        important: !(e.currentTarget.getAttribute('booleanmark') === 'true'),
+      },
     })
   }
   const handleClickDone = (e: React.MouseEvent<HTMLSpanElement>) => {
     updateTodo({
-      id: (e.target as HTMLElement).getAttribute('data-id'),
-      update: { done: !(e.target.getAttribute('booleanmark') === 'true') },
+      id: (e.currentTarget as HTMLElement).getAttribute('data-id'),
+      update: {
+        done: !(e.currentTarget.getAttribute('booleanmark') === 'true'),
+      },
     })
   }
   if (isLoading) {

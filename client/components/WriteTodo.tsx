@@ -19,7 +19,6 @@ export function WriteToDo() {
   return (
     <form onSubmit={handleSubmit} aria-label="New To Do" className="new-to-do">
       <div>
-        {' '}
         <input
           aria-label="to do text"
           className="to-do-text"
@@ -31,6 +30,9 @@ export function WriteToDo() {
       </div>
       <div>
         <button className="button-to-do">Create New To Do</button>
+      </div>
+      <div>
+        <p>Important: ❗️ Done: ✅ Delete: 🗑️</p>
       </div>
     </form>
   )
