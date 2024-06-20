@@ -1,16 +1,14 @@
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import request from 'superagent'
 const API_HOST = 'https://paataka.cloud/api/_/team-todo'
 const TOKEN = 'inboT4cuIWA'
 
-export function useUpdate() {
+export function useDelete() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async ({ id, data }) => {
-      console.log(data)
+    mutationFn: async (id) => {
       const res = await request
-        .patch(`${API_HOST}/todo/${id}`)
-        .send(data)
+        .delete(`${API_HOST}/todo/${id}`)
         .auth(TOKEN, { type: 'bearer' })
       return res.body
     },

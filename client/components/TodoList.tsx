@@ -1,11 +1,18 @@
 import { useToDos } from '../hooks/use-todos'
 import { useDelete } from '../hooks/use-delete'
-import { useUpDate } from '../hooks/use-update'
-export function ToDoList() {
+import { useUpdate } from '../hooks/use-update'
+import { ToDo } from '../../models/todo'
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  Key,
+  ReactPortal,
+} from 'react'
+export function TodoList() {
   const { data, isLoading, isError } = useToDos()
-  const deletetodo = useDelete()
-  const update = useUpDate()
-  console.log(data)
+  const { mutate: deleteTodo } = useDelete()
+  const { mutate: updateTodo } = useUpdate()
   if (isLoading) {
     return <div>Loading</div>
   }
@@ -18,7 +25,7 @@ export function ToDoList() {
   return (
     <div>
       <ul>
-        {data.items.map((todo) => (
+        {data.items.map((todo: ToDo) => (
           <li key={todo.id}>
             {todo.id} - {todo.name}-
             <label>
@@ -27,13 +34,29 @@ export function ToDoList() {
                 type="checkbox"
                 checked={todo.important}
                 onChange={(e) => {
-                  update.mutate({ id: todo.id, important: e.target.checked })
+                  updateTodo({
+                    id: todo.id,
+                    data: { important: e.target.checked },
+                  })
+                }}
+              />
+            </label>
+            <label>
+              Done
+              <input
+                type="checkbox"
+                checked={todo.done}
+                onChange={(e) => {
+                  updateTodo({
+                    id: todo.id,
+                    data: { done: e.target.checked },
+                  })
                 }}
               />
             </label>
             <button
               onClick={() => {
-                deletetodo.mutate(todo.id)
+                deleteTodo(todo.id)
               }}
             >
               delete
