@@ -7,21 +7,15 @@ export function TodoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
   const { mutate: updateTodo } = useUpdate()
-  const handleClickIm = (e) => {
-    console.log(e.target.getAttribute('data-id'))
-    console.log(e.target.getAttribute('booleanMark'))
-
+  const handleClickIm = (e: React.MouseEvent<HTMLSpanElement>) => {
     updateTodo({
-      id: e.target.getAttribute('data-id'),
+      id: (e.target as HTMLElement).getAttribute('data-id'),
       update: { important: !(e.target.getAttribute('booleanmark') === 'true') },
     })
   }
-  const handleClickDone = (e) => {
-    console.log(e.target.getAttribute('data-id'))
-    console.log(e.target.getAttribute('booleanMark'))
-
+  const handleClickDone = (e: React.MouseEvent<HTMLSpanElement>) => {
     updateTodo({
-      id: e.target.getAttribute('data-id'),
+      id: (e.target as HTMLElement).getAttribute('data-id'),
       update: { done: !(e.target.getAttribute('booleanmark') === 'true') },
     })
   }
