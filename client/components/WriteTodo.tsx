@@ -1,35 +1,37 @@
 import { useCreate } from '../hooks/use-create'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react'
 export function WriteToDo() {
-  const defaultValue = 'What would you like Todo ?'
-  const [formData, setFormData] = useState(defaultValue)
+  const [formData, setFormData] = useState('')
   const { mutate: createToDo } = useCreate()
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData(e.target.value)
   }
-  const handleClick = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (formData && typeof formData === 'string' && formData !== defaultValue) {
+    if (formData && typeof formData === 'string') {
       createToDo(formData)
       setFormData('')
     } else {
       alert('Please type Todo in!')
     }
   }
-  const handleClickClear = () => {
-    if (formData === defaultValue) {
-      setFormData('')
-    }
-  }
+
   return (
-    <form>
-      <input
-        type="text"
-        value={formData}
-        onChange={handleChange}
-        onClick={handleClickClear}
-      />
-      <button onClick={handleClick}>submit</button>
+    <form onSubmit={handleSubmit} aria-label="New To Do" className="new-to-do">
+      <div>
+        {' '}
+        <input
+          aria-label="to do text"
+          className="to-do-text"
+          type="text"
+          value={formData}
+          onChange={handleChange}
+          placeholder="What would you like Todo ?"
+        />
+      </div>
+      <div>
+        <button className="button-to-do">Create New To Do</button>
+      </div>
     </form>
   )
 }
