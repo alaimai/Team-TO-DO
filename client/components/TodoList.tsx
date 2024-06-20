@@ -2,13 +2,7 @@ import { useToDos } from '../hooks/use-todos'
 import { useDelete } from '../hooks/use-delete'
 import { useUpdate } from '../hooks/use-update'
 import { ToDo } from '../../models/todo'
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  Key,
-  ReactPortal,
-} from 'react'
+
 export function TodoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
@@ -59,7 +53,7 @@ export function TodoList() {
                 deleteTodo(todo.id)
               }}
             >
-              delete
+              🗑️
             </button>
           </li>
         ))}
