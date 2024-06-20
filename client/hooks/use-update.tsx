@@ -6,11 +6,10 @@ const TOKEN = 'inboT4cuIWA'
 export function useUpdate() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async ({ id, data }) => {
-      console.log(data)
+    mutationFn: async ({ id, update }) => {
       const res = await request
         .patch(`${API_HOST}/todo/${id}`)
-        .send(data)
+        .send(update)
         .auth(TOKEN, { type: 'bearer' })
       return res.body
     },

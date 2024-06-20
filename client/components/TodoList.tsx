@@ -7,6 +7,24 @@ export function TodoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
   const { mutate: updateTodo } = useUpdate()
+  const handleClickIm = (e) => {
+    console.log(e.target.getAttribute('data-id'))
+    console.log(e.target.getAttribute('booleanMark'))
+
+    updateTodo({
+      id: e.target.getAttribute('data-id'),
+      update: { important: !(e.target.getAttribute('booleanmark') === 'true') },
+    })
+  }
+  const handleClickDone = (e) => {
+    console.log(e.target.getAttribute('data-id'))
+    console.log(e.target.getAttribute('booleanMark'))
+
+    updateTodo({
+      id: e.target.getAttribute('data-id'),
+      update: { done: !(e.target.getAttribute('booleanmark') === 'true') },
+    })
+  }
   if (isLoading) {
     return <div>Loading</div>
   }
@@ -21,8 +39,44 @@ export function TodoList() {
       <ul>
         {data.items.map((todo: ToDo) => (
           <li key={todo.id}>
-            {todo.id} - {todo.name}-
-            <label>
+            {todo.name} -
+            {todo.important && (
+              <span
+                data-id={todo.id}
+                booleanmark="true"
+                onClick={handleClickIm}
+              >
+                ❗️
+              </span>
+            )}
+            {!todo.important && (
+              <span
+                data-id={todo.id}
+                booleanmark="false"
+                onClick={handleClickIm}
+              >
+                ❓
+              </span>
+            )}
+            {todo.done && (
+              <span
+                data-id={todo.id}
+                booleanmark="true"
+                onClick={handleClickDone}
+              >
+                ✅
+              </span>
+            )}
+            {!todo.done && (
+              <span
+                data-id={todo.id}
+                booleanmark="false"
+                onClick={handleClickDone}
+              >
+                ❌
+              </span>
+            )}
+            {/* <label>
               important
               <input
                 type="checkbox"
@@ -34,8 +88,8 @@ export function TodoList() {
                   })
                 }}
               />
-            </label>
-            <label>
+            </label> */}
+            {/* <label>
               Done
               <input
                 type="checkbox"
@@ -47,7 +101,7 @@ export function TodoList() {
                   })
                 }}
               />
-            </label>
+            </label> */}
             <button
               onClick={() => {
                 deleteTodo(todo.id)
