@@ -3,18 +3,18 @@ import request from 'superagent'
 const API_HOST = 'https://paataka.cloud/api/_/team-todo'
 const TOKEN = 'inboT4cuIWA'
 
-export function useUpDate(id) {
+export function useUpDate() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async ({ data, id }) => {
       const res = await request
-        .put(`${API_HOST}/todo/${id}`)
-        .send(data)
+        .patch(`${API_HOST}/todo/${id}`)
+        .send({ data })
         .auth(TOKEN, { type: 'bearer' })
       return res.body
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos', id] })
+      queryClient.invalidateQueries({ queryKey: ['todos'] })
     },
   })
 }
