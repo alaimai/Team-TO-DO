@@ -7,19 +7,17 @@ export function TodoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
   const { mutate: updateTodo } = useUpdate()
-  const handleClickIm = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleClickIm = (todo: ToDo) => {
     updateTodo({
-      id: (e.currentTarget as HTMLElement).getAttribute('data-id'),
-      update: {
-        important: !(e.currentTarget.getAttribute('booleanmark') === 'true'),
-      },
+      id: todo.id,
+      update: { important: !todo.important },
     })
   }
-  const handleClickDone = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleClickDone = (todo: ToDo) => {
     updateTodo({
-      id: (e.currentTarget as HTMLElement).getAttribute('data-id'),
+      id: todo.id,
       update: {
-        done: !(e.currentTarget.getAttribute('booleanmark') === 'true'),
+        done: !todo.done,
       },
     })
   }
@@ -39,40 +37,18 @@ export function TodoList() {
           <li key={todo.id}>
             {todo.name} -
             {todo.important && (
-              <span
-                data-id={todo.id}
-                booleanmark="true"
-                onClick={handleClickIm}
-              >
+              <span data-id={todo.id} onClick={() => handleClickIm(todo)}>
                 ❗️
               </span>
             )}
             {!todo.important && (
-              <span
-                data-id={todo.id}
-                booleanmark="false"
-                onClick={handleClickIm}
-              >
+              <span data-id={todo.id} onClick={() => handleClickIm(todo)}>
                 ❓
               </span>
             )}
-            {todo.done && (
-              <span
-                data-id={todo.id}
-                booleanmark="true"
-                onClick={handleClickDone}
-              >
-                ✅
-              </span>
-            )}
+            {todo.done && <span onClick={() => handleClickDone(todo)}>✅</span>}
             {!todo.done && (
-              <span
-                data-id={todo.id}
-                booleanmark="false"
-                onClick={handleClickDone}
-              >
-                ❌
-              </span>
+              <span onClick={() => handleClickDone(todo)}>❌</span>
             )}
             {/* <label>
               important
