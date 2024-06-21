@@ -3,16 +3,20 @@ import { useDelete } from '../hooks/use-delete'
 import { useUpdate } from '../hooks/use-update'
 import { ToDo } from '../../models/todo'
 
-export function ToDoList() {
+export function TodoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
   const { mutate: updateTodo } = useUpdate()
+
   const handleClickIm = (todo: ToDo) => {
     updateTodo({
       id: todo.id,
-      update: { important: !todo.important },
+      update: {
+        important: !todo.important,
+      },
     })
   }
+
   const handleClickDone = (todo: ToDo) => {
     updateTodo({
       id: todo.id,
@@ -21,11 +25,12 @@ export function ToDoList() {
       },
     })
   }
+
   if (isLoading) {
     return <div>Loading</div>
   }
   if (isError) {
-    return <div>something wrong</div>
+    return <div>Something is Wrong!</div>
   }
   if (!data || !data.items) {
     return <div>no todo list</div>
@@ -34,31 +39,58 @@ export function ToDoList() {
     <div>
       <ul>
         {data.items.map((todo: ToDo) => (
-          <li key={todo.id}>
-            {todo.name} -
-            {todo.important && (
-              <button data-id={todo.id} onClick={() => handleClickIm(todo)}>
-                ❗️
+          <li
+            className={`todo-li ${todo.important ? 'important' : ''}`}
+            key={todo.id}
+          >
+            {todo.name}
+            <div className="button-container">
+              <button
+                className={`button ${todo.important ? 'important-button' : ''}`}
+                onClick={() => handleClickIm(todo)}
+                aria-label={`Mark as ${
+                  todo.important ? 'not important' : 'important'
+                }`}
+              >
+                {todo.important ? '❗️' : '❓'}
               </button>
-            )}
-            {!todo.important && (
-              <button data-id={todo.id} onClick={() => handleClickIm(todo)}>
-                ❓
+              <button
+                className="button"
+                onClick={() => handleClickDone(todo)}
+                aria-label={`Mark as ${todo.done ? 'not done' : 'done'}`}
+              >
+                {todo.done ? '✅' : '❌'}
               </button>
-            )}
-            {todo.done && (
-              <button onClick={() => handleClickDone(todo)}>✅</button>
-            )}
-            {!todo.done && (
-              <button onClick={() => handleClickDone(todo)}>❌</button>
-            )}
-            <button
-              onClick={() => {
-                deleteTodo(todo.id)
-              }}
-            >
-              🗑️
-            </button>
+              <button className="button" onClick={() => deleteTodo(todo.id)}>
+                🗑️
+              </button>
+            </div>
+            {/* <label>
+              important
+              <input
+                type="checkbox"
+                checked={todo.important}
+                onChange={(e) => {
+                  updateTodo({
+                    id: todo.id,
+                    data: { important: e.target.checked },
+                  })
+                }}
+              />
+            </label> */}
+            {/* <label>
+              Done
+              <input
+                type="checkbox"
+                checked={todo.done}
+                onChange={(e) => {
+                  updateTodo({
+                    id: todo.id,
+                    data: { done: e.target.checked },
+                  })
+                }}
+              />
+            </label> */}
           </li>
         ))}
       </ul>
