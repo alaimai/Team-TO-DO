@@ -3,13 +3,9 @@ export interface ToDo {
   id: number
   created_on: number
   important: boolean
-  done: boolean 
+  done: boolean
 }
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> development
 export interface List {
   list: ToDo[]
 }

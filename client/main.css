@@ -1,0 +1,117 @@
+:root {
+  --primary-color: #566d38;
+  --secondary-color: #a0b286;
+  --text-color: #3d4c26;
+  --background-color: #f9f7f3;
+}
+
+.page-title {
+  display: inline-block;
+  padding: 20px;
+  color: var(--primary-color);
+  font-size: 40px;
+  font-family: Cambria, Cochin;
+  margin-bottom: 20px;
+}
+
+.todo-li {
+  background-color: var(--background-color);
+  border-radius: 1em;
+  padding: 15px;
+  font-size: 20px;
+  font-family: Cambria, Cochin;
+  color: var(--text-color);
+  margin: 5px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.important {
+  border-color: red;
+}
+
+.important-button {
+  font-size: 30px;
+  border: 2px solid red;
+  padding: 10px;
+  color: red;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 30px;
+  padding: 5px;
+  margin: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.button-container {
+  position: relative;
+}
+
+.todo-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: auto;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.new-todo {
+  background-color: var(--background-color);
+  padding: 25px;
+  border-radius: 5px;
+  width: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.todo-list {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  width: auto;
+}
+
+.to-do-text {
+  width: 250px;
+  height: 50px;
+  font-family: Cambria, Cochin;
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 3px;
+  font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.button-to-do {
+  width: 200px;
+  font-family: Cambria, Cochin;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.button-to-do:hover {
+  background-color: #3d4c26;
+}
