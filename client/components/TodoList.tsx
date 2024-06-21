@@ -3,7 +3,7 @@ import { useDelete } from '../hooks/use-delete'
 import { useUpdate } from '../hooks/use-update'
 import { ToDo } from '../../models/todo'
 
-export function TodoList() {
+export function ToDoList() {
   const { data, isLoading, isError } = useToDos()
   const { mutate: deleteTodo } = useDelete()
   const { mutate: updateTodo } = useUpdate()
@@ -37,45 +37,21 @@ export function TodoList() {
           <li key={todo.id}>
             {todo.name} -
             {todo.important && (
-              <span data-id={todo.id} onClick={() => handleClickIm(todo)}>
+              <button data-id={todo.id} onClick={() => handleClickIm(todo)}>
                 ❗️
-              </span>
+              </button>
             )}
             {!todo.important && (
-              <span data-id={todo.id} onClick={() => handleClickIm(todo)}>
+              <button data-id={todo.id} onClick={() => handleClickIm(todo)}>
                 ❓
-              </span>
+              </button>
             )}
-            {todo.done && <span onClick={() => handleClickDone(todo)}>✅</span>}
+            {todo.done && (
+              <button onClick={() => handleClickDone(todo)}>✅</button>
+            )}
             {!todo.done && (
-              <span onClick={() => handleClickDone(todo)}>❌</span>
+              <button onClick={() => handleClickDone(todo)}>❌</button>
             )}
-            {/* <label>
-              important
-              <input
-                type="checkbox"
-                checked={todo.important}
-                onChange={(e) => {
-                  updateTodo({
-                    id: todo.id,
-                    data: { important: e.target.checked },
-                  })
-                }}
-              />
-            </label> */}
-            {/* <label>
-              Done
-              <input
-                type="checkbox"
-                checked={todo.done}
-                onChange={(e) => {
-                  updateTodo({
-                    id: todo.id,
-                    data: { done: e.target.checked },
-                  })
-                }}
-              />
-            </label> */}
             <button
               onClick={() => {
                 deleteTodo(todo.id)

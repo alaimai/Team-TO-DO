@@ -1,4 +1,4 @@
-import { TodoList } from './TodoList'
+import { ToDoList } from './TodoList'
 import { WriteToDo } from './WriteTodo'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
       <h1>App</h1>
       <p>React development has begun!</p>
       <WriteToDo />
-      <TodoList />
+      <ToDoList />
     </div>
   )
 }
