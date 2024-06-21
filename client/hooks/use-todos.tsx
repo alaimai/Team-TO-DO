@@ -11,6 +11,7 @@ export function useToDos() {
     queryFn: async () => {
       const res = await request
         .get(`${API_HOST}todo`)
+        .query({ orderBy: '_.important', dir: 'desc' })
         .auth(TOKEN, { type: 'bearer' })
 
       // console.log('api call:', res.body)
