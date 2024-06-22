@@ -29,7 +29,11 @@
   overflow-y: auto;
   width: auto;
 }
-
+.grid-li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 .todo-li {
   background-color: var(--background-color);
   border-radius: 1em;

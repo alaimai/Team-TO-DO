@@ -1,5 +1,5 @@
 import '../main.css'
-import { TodoList } from './ToDoList'
+import { TodoList } from './TodoList'
 import WriteToDo from './WriteTodo'
 
 function App() {

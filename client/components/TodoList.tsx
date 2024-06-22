@@ -2,6 +2,7 @@ import { useToDos } from '../hooks/use-todos'
 import { useDelete } from '../hooks/use-delete'
 import { useUpdate } from '../hooks/use-update'
 import { ToDo } from '../../models/todo'
+import React from 'react'
 
 export function TodoList() {
   const { data, isLoading, isError } = useToDos()
@@ -36,12 +37,13 @@ export function TodoList() {
     return <div>no todo list</div>
   }
   return (
-    <div>
-      <ul>
+    <>
+      <ul className="grid-li">
         {data.items.map((todo: ToDo) => (
           <li
             className={`todo-li ${todo.important ? 'important' : ''}`}
             key={todo.id}
+            style={{ textDecoration: todo.done ? 'line-through' : 'none' }}
           >
             {todo.name}
             <div className="button-container">
@@ -94,6 +96,6 @@ export function TodoList() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
