@@ -34,13 +34,14 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
+
 .todo-li {
   background-color: var(--background-color);
   border-radius: 1em;
   padding: 10px;
   margin: 5px;
   width: 325px;
-  font-size: 18px;
+  font-size: 22px;
   font-family: Cambria, Cochin;
   color: var(--text-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
